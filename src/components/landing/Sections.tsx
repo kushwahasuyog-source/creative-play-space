@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import {
   Activity,
   BarChartSquare02,
@@ -174,14 +175,14 @@ export function Features() {
 /* ---------------- Templates ---------------- */
 
 const templates = [
-  { name: "File Converter Bot", cat: "Utility" },
-  { name: "AI Chat Bot", cat: "AI" },
-  { name: "Group Moderation Bot", cat: "Moderation" },
-  { name: "Welcome Bot", cat: "Community" },
-  { name: "URL Shortener Bot", cat: "Productivity" },
-  { name: "QR Generator Bot", cat: "Utility" },
-  { name: "Reminder Bot", cat: "Productivity" },
-  { name: "Quiz Bot", cat: "Education" },
+  { name: "File Converter Bot", slug: "file-converter", cat: "Utility" },
+  { name: "AI Chat Bot", slug: "ai-chat", cat: "AI" },
+  { name: "Group Moderation Bot", slug: "group-moderation", cat: "Moderation" },
+  { name: "Welcome Bot", slug: "welcome", cat: "Community" },
+  { name: "URL Shortener Bot", slug: "url-shortener", cat: "Productivity" },
+  { name: "QR Generator Bot", slug: "qr-generator", cat: "Utility" },
+  { name: "Reminder Bot", slug: "reminder", cat: "Productivity" },
+  { name: "Quiz Bot", slug: "quiz", cat: "Education" },
 ];
 
 export function Templates() {
@@ -194,15 +195,17 @@ export function Templates() {
       />
       <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {templates.map((t) => (
-          <Card key={t.name} className="p-5">
+          <Link key={t.name} to="/app/new" search={{ template: t.slug }} className="block rounded-2xl transition-transform hover:-translate-y-0.5">
+          <Card className="h-full p-5 hover:border-accent/50">
             <span className="font-mono text-[11px] uppercase tracking-widest text-accent">
               {t.cat}
             </span>
             <h3 className="mt-3 text-base font-semibold">{t.name}</h3>
             <p className="mt-3 flex items-center gap-2 text-xs text-muted-foreground">
-              <Zap className="size-3.5 text-accent" /> Deploy in one click
+              <Zap className="size-3.5 text-accent" /> Use this template
             </p>
           </Card>
+          </Link>
         ))}
       </div>
     </Section>
