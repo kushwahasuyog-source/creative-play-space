@@ -14,7 +14,193 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bot_commands: {
+        Row: {
+          bot_id: string
+          command: string
+          created_at: string
+          description: string
+          id: string
+          owner_id: string
+          position: number
+          reply: string
+          use_ai: boolean
+        }
+        Insert: {
+          bot_id: string
+          command: string
+          created_at?: string
+          description?: string
+          id?: string
+          owner_id: string
+          position?: number
+          reply?: string
+          use_ai?: boolean
+        }
+        Update: {
+          bot_id?: string
+          command?: string
+          created_at?: string
+          description?: string
+          id?: string
+          owner_id?: string
+          position?: number
+          reply?: string
+          use_ai?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bot_commands_bot_id_fkey"
+            columns: ["bot_id"]
+            isOneToOne: false
+            referencedRelation: "bots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bot_messages: {
+        Row: {
+          bot_id: string
+          created_at: string
+          direction: string
+          id: string
+          owner_id: string
+          telegram_chat_id: number | null
+          telegram_user: string | null
+          text: string | null
+        }
+        Insert: {
+          bot_id: string
+          created_at?: string
+          direction?: string
+          id?: string
+          owner_id: string
+          telegram_chat_id?: number | null
+          telegram_user?: string | null
+          text?: string | null
+        }
+        Update: {
+          bot_id?: string
+          created_at?: string
+          direction?: string
+          id?: string
+          owner_id?: string
+          telegram_chat_id?: number | null
+          telegram_user?: string | null
+          text?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bot_messages_bot_id_fkey"
+            columns: ["bot_id"]
+            isOneToOne: false
+            referencedRelation: "bots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      bots: {
+        Row: {
+          created_at: string
+          id: string
+          last_activity_at: string | null
+          message_count: number
+          name: string
+          owner_id: string
+          prompt: string
+          spec: Json
+          status: string
+          telegram_username: string | null
+          template_slug: string | null
+          token_cipher: string | null
+          token_hint: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          last_activity_at?: string | null
+          message_count?: number
+          name?: string
+          owner_id: string
+          prompt?: string
+          spec?: Json
+          status?: string
+          telegram_username?: string | null
+          template_slug?: string | null
+          token_cipher?: string | null
+          token_hint?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          last_activity_at?: string | null
+          message_count?: number
+          name?: string
+          owner_id?: string
+          prompt?: string
+          spec?: Json
+          status?: string
+          telegram_username?: string | null
+          template_slug?: string | null
+          token_cipher?: string | null
+          token_hint?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          email: string | null
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          email?: string | null
+          id?: string
+        }
+        Relationships: []
+      }
+      templates: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          id: string
+          name: string
+          slug: string
+          starter_prompt: string
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description: string
+          id?: string
+          name: string
+          slug: string
+          starter_prompt: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          id?: string
+          name?: string
+          slug?: string
+          starter_prompt?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
