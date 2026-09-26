@@ -1,6 +1,8 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import { Code02, Grid01, MessageSmileCircle, Plus } from "@untitledui/icons";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
+
+import { supabase } from "@/integrations/supabase/client";
 
 import { cn } from "@/lib/utils";
 
@@ -12,6 +14,26 @@ const nav = [
 ] as const;
 
 export function AppShell({ children }: { children: ReactNode }) {
+  const navigate = useNavigate();
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      if (!data.session) navigate({ to: "/auth" });
+      else setReady(true);
+    });
+    const { data } = supabase.auth.onAuthStateChange((_e, s) => {
+      if (!s) navigate({ to: "/auth" });
+    });
+    return () => data.subscription.unsubscribe();
+  }, [navigate]);
+  if (!ready)
+    return (
+      <div className="mx-auto max-w-6xl space-y-4 px-6 py-16">
+        <div className="h-8 w-48 animate-pulse rounded bg-surface" />
+        <div className="h-32 animate-pulse rounded-xl bg-surface" />
+        <div className="h-32 animate-pulse rounded-xl bg-surface" />
+      </div>
+    );
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-xl">
@@ -46,7 +68,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      <div className="flex gap-2 border-b border-border px-6 py-3 md:hidden">
+      <div className="flex gap-2 overflow-x-auto border-b border-border px-4 py-3 md:hidden">
         {nav.map((item) => (
           <Link
             key={item.to}
