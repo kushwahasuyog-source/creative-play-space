@@ -10,33 +10,142 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ComponentsRouteImport } from './routes/components'
+import { Route as ApiAssistantRouteImport } from './routes/api/assistant'
+import { Route as AppIndexRouteImport } from './routes/app/index'
+import { Route as AppAssistantRouteImport } from './routes/app/assistant'
+import { Route as AppNewRouteImport } from './routes/app/new'
+import { Route as AppTemplatesRouteImport } from './routes/app/templates'
+import { Route as AppBotsBotIdRouteImport } from './routes/app/bots.$botId'
+import { Route as ApiPublicTelegramWebhookBotIdRouteImport } from './routes/api/public/telegram/webhook/$botId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComponentsRoute = ComponentsRouteImport.update({
+  id: '/components',
+  path: '/components',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAssistantRoute = ApiAssistantRouteImport.update({
+  id: '/api/assistant',
+  path: '/api/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/app/',
+  path: '/app/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppAssistantRoute = AppAssistantRouteImport.update({
+  id: '/app/assistant',
+  path: '/app/assistant',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppNewRoute = AppNewRouteImport.update({
+  id: '/app/new',
+  path: '/app/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppTemplatesRoute = AppTemplatesRouteImport.update({
+  id: '/app/templates',
+  path: '/app/templates',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppBotsBotIdRoute = AppBotsBotIdRouteImport.update({
+  id: '/app/bots/$botId',
+  path: '/app/bots/$botId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicTelegramWebhookBotIdRoute =
+  ApiPublicTelegramWebhookBotIdRouteImport.update({
+    id: '/api/public/telegram/webhook/$botId',
+    path: '/api/public/telegram/webhook/$botId',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/components': typeof ComponentsRoute
+  '/api/assistant': typeof ApiAssistantRoute
+  '/app/assistant': typeof AppAssistantRoute
+  '/app/new': typeof AppNewRoute
+  '/app/templates': typeof AppTemplatesRoute
+  '/app/': typeof AppIndexRoute
+  '/app/bots/$botId': typeof AppBotsBotIdRoute
+  '/api/public/telegram/webhook/$botId': typeof ApiPublicTelegramWebhookBotIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/components': typeof ComponentsRoute
+  '/api/assistant': typeof ApiAssistantRoute
+  '/app/assistant': typeof AppAssistantRoute
+  '/app/new': typeof AppNewRoute
+  '/app/templates': typeof AppTemplatesRoute
+  '/app': typeof AppIndexRoute
+  '/app/bots/$botId': typeof AppBotsBotIdRoute
+  '/api/public/telegram/webhook/$botId': typeof ApiPublicTelegramWebhookBotIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/components': typeof ComponentsRoute
+  '/api/assistant': typeof ApiAssistantRoute
+  '/app/assistant': typeof AppAssistantRoute
+  '/app/new': typeof AppNewRoute
+  '/app/templates': typeof AppTemplatesRoute
+  '/app/': typeof AppIndexRoute
+  '/app/bots/$botId': typeof AppBotsBotIdRoute
+  '/api/public/telegram/webhook/$botId': typeof ApiPublicTelegramWebhookBotIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/components'
+    | '/api/assistant'
+    | '/app/assistant'
+    | '/app/new'
+    | '/app/templates'
+    | '/app/'
+    | '/app/bots/$botId'
+    | '/api/public/telegram/webhook/$botId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/components'
+    | '/api/assistant'
+    | '/app/assistant'
+    | '/app/new'
+    | '/app/templates'
+    | '/app'
+    | '/app/bots/$botId'
+    | '/api/public/telegram/webhook/$botId'
+  id:
+    | '__root__'
+    | '/'
+    | '/components'
+    | '/api/assistant'
+    | '/app/assistant'
+    | '/app/new'
+    | '/app/templates'
+    | '/app/'
+    | '/app/bots/$botId'
+    | '/api/public/telegram/webhook/$botId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ComponentsRoute: typeof ComponentsRoute
+  ApiAssistantRoute: typeof ApiAssistantRoute
+  AppAssistantRoute: typeof AppAssistantRoute
+  AppNewRoute: typeof AppNewRoute
+  AppTemplatesRoute: typeof AppTemplatesRoute
+  AppIndexRoute: typeof AppIndexRoute
+  AppBotsBotIdRoute: typeof AppBotsBotIdRoute
+  ApiPublicTelegramWebhookBotIdRoute: typeof ApiPublicTelegramWebhookBotIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +157,75 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/components': {
+      id: '/components'
+      path: '/components'
+      fullPath: '/components'
+      preLoaderRoute: typeof ComponentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/assistant': {
+      id: '/api/assistant'
+      path: '/api/assistant'
+      fullPath: '/api/assistant'
+      preLoaderRoute: typeof ApiAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/': {
+      id: '/app/'
+      path: '/app'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/assistant': {
+      id: '/app/assistant'
+      path: '/app/assistant'
+      fullPath: '/app/assistant'
+      preLoaderRoute: typeof AppAssistantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/new': {
+      id: '/app/new'
+      path: '/app/new'
+      fullPath: '/app/new'
+      preLoaderRoute: typeof AppNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/templates': {
+      id: '/app/templates'
+      path: '/app/templates'
+      fullPath: '/app/templates'
+      preLoaderRoute: typeof AppTemplatesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/bots/$botId': {
+      id: '/app/bots/$botId'
+      path: '/app/bots/$botId'
+      fullPath: '/app/bots/$botId'
+      preLoaderRoute: typeof AppBotsBotIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/telegram/webhook/$botId': {
+      id: '/api/public/telegram/webhook/$botId'
+      path: '/api/public/telegram/webhook/$botId'
+      fullPath: '/api/public/telegram/webhook/$botId'
+      preLoaderRoute: typeof ApiPublicTelegramWebhookBotIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ComponentsRoute: ComponentsRoute,
+  ApiAssistantRoute: ApiAssistantRoute,
+  AppAssistantRoute: AppAssistantRoute,
+  AppNewRoute: AppNewRoute,
+  AppTemplatesRoute: AppTemplatesRoute,
+  AppIndexRoute: AppIndexRoute,
+  AppBotsBotIdRoute: AppBotsBotIdRoute,
+  ApiPublicTelegramWebhookBotIdRoute: ApiPublicTelegramWebhookBotIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
