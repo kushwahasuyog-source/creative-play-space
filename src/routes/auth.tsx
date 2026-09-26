@@ -53,7 +53,7 @@ function AuthPage() {
   }
 
   return (
-    <main id="main" className="flex min-h-screen items-center justify-center bg-background px-4">
+    <main className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="w-full max-w-sm rounded-2xl border border-border bg-surface p-6 sm:p-8">
         <Link to="/" className="font-display text-lg font-semibold">BotForge</Link>
         <h1 className="mt-4 text-2xl font-semibold">{mode === "in" ? "Sign in" : "Create account"}</h1>

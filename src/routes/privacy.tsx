@@ -11,7 +11,7 @@ export const Route = createFileRoute("/privacy")({
     ],
   }),
   component: () => (
-    <main id="main" className="mx-auto max-w-2xl px-6 py-16">
+    <main className="mx-auto max-w-2xl px-6 py-16">
       <Link to="/" className="text-sm text-accent">← BotForge</Link>
       <h1 className="mt-4 text-3xl font-semibold">Privacy Policy</h1>
       <p className="mt-2 text-xs text-muted-foreground">Last updated: September 26, 2026</p>

@@ -246,3 +246,8 @@
   animation: flip-digit 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
   backface-visibility: hidden;
 }
+
+@media print {
+  body { background: #fff !important; color: #000 !important; }
+  a { text-decoration: underline; }
+}
