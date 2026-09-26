@@ -400,9 +400,9 @@ export function Cta() {
 }
 
 const footerCols = [
-  { title: "Product", links: ["Features", "Templates", "Automations", "Pricing"] },
-  { title: "Developers", links: ["Documentation", "API reference", "Changelog", "Status"] },
-  { title: "Company", links: ["Blog", "Contact", "Privacy", "Terms"] },
+  { title: "Product", links: [["Features", "/#features"], ["Templates", "/#templates"], ["Pricing", "/#pricing"], ["FAQ", "/#faq"]] },
+  { title: "App", links: [["My bots", "/app"], ["AI builder", "/app/new"], ["Coding assistant", "/app/assistant"], ["Sign in", "/auth"]] },
+  { title: "Company", links: [["hello@botforge.app", "mailto:hello@botforge.app"], ["+1 000 000 0000", "tel:+10000000000"], ["Privacy", "/privacy"], ["Terms", "/terms"]] },
 ];
 
 export function Footer() {
@@ -425,10 +425,10 @@ export function Footer() {
             <h3 className="font-mono text-xs uppercase tracking-widest text-accent">{c.title}</h3>
             <ul className="mt-4 space-y-2.5">
               {c.links.map((l) => (
-                <li key={l}>
-                  <span className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                    {l}
-                  </span>
+                <li key={l[0]}>
+                  <a href={l[1]} className="break-all text-sm text-muted-foreground transition-colors hover:text-foreground">
+                    {l[0]}
+                  </a>
                 </li>
               ))}
             </ul>
