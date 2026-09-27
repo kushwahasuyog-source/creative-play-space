@@ -1,3 +1,4 @@
+import { ThemeToggle } from "@/components/site/ThemeToggle";
 import { useState } from "react";
 import { MessageSmileCircle } from "@untitledui/icons";
 import { ActionLink } from "./primitives";
@@ -34,6 +35,7 @@ export function Nav() {
           <a href="/app" className="hidden text-sm text-muted-foreground transition-colors hover:text-foreground sm:block">
             My bots
           </a>
+          <ThemeToggle />
           <ActionLink href="/app" className="whitespace-nowrap px-3 py-2 sm:px-4">
             Create your bot
           </ActionLink>
