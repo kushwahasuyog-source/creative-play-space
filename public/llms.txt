@@ -1,0 +1,12 @@
+# BotForge
+
+> BotForge builds Telegram bots with AI. Describe a bot in plain words; BotForge generates its commands and replies, connects your BotFather token, and hosts it live.
+
+## Pages
+- [Home](/): features, templates, pricing and FAQ
+- [UI blocks](/components): showcase of BotForge page blocks
+- [Privacy Policy](/privacy)
+- [Terms of Service](/terms)
+
+## Templates
+File converter, AI chat, group moderation, welcome bot, URL shortener, QR generator, reminders, quiz.

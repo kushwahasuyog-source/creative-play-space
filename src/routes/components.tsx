@@ -21,6 +21,7 @@ const description =
 export const Route = createFileRoute("/components")({
   head: () => ({
     meta: [
+      { property: "og:url", content: "/components" },
       { title },
       { name: "description", content: description },
       { property: "og:title", content: title },
@@ -28,6 +29,7 @@ export const Route = createFileRoute("/components")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "/components" }],
   }),
   component: BlocksPage,
 });
@@ -37,6 +39,7 @@ function BlocksPage() {
     <div className="min-h-screen bg-background pb-40">
       <Nav />
       <main>
+        <h1 className="sr-only">BotForge UI blocks</h1>
         <Section id="countdown">
           <SectionHeading
             eyebrow="Countdown"

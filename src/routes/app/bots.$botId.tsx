@@ -12,6 +12,7 @@ export const Route = createFileRoute("/app/bots/$botId")({
   ssr: false,
   head: () => ({
     meta: [
+      { name: "robots", content: "noindex" },
       { title: "Bot settings — BotForge" },
       {
         name: "description",

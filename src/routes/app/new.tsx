@@ -25,6 +25,7 @@ export const Route = createFileRoute("/app/new")({
   }),
   head: () => ({
     meta: [
+      { name: "robots", content: "noindex" },
       { title: "AI bot builder — BotForge" },
       {
         name: "description",

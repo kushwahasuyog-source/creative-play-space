@@ -21,6 +21,7 @@ const description =
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { property: "og:url", content: "/" },
       { title },
       { name: "description", content: description },
       { property: "og:title", content: title },
@@ -28,6 +29,7 @@ export const Route = createFileRoute("/")({
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: "/" }],
   }),
   component: Index,
 });

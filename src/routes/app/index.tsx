@@ -11,6 +11,7 @@ export const Route = createFileRoute("/app/")({
   ssr: false,
   head: () => ({
     meta: [
+      { name: "robots", content: "noindex" },
       { title: "My bots — BotForge" },
       { name: "description", content: "Every Telegram bot you have built, with live status." },
       { property: "og:title", content: "My bots — BotForge" },

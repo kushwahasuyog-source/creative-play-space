@@ -100,6 +100,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
       },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            { "@type": "Organization", name: "BotForge", email: "hello@botforge.app" },
+            { "@type": "WebSite", name: "BotForge" },
+            {
+              "@type": "SoftwareApplication",
+              name: "BotForge",
+              applicationCategory: "DeveloperApplication",
+              operatingSystem: "Web",
+              description: "Build, deploy and run Telegram bots from a plain-language description.",
+            },
+          ],
+        }),
+      },
+    ],
   }),
   shellComponent: RootShell,
   component: RootComponent,
