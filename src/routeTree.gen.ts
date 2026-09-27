@@ -20,6 +20,8 @@ import { Route as AppAssistantRouteImport } from './routes/app/assistant'
 import { Route as AppNewRouteImport } from './routes/app/new'
 import { Route as AppTemplatesRouteImport } from './routes/app/templates'
 import { Route as AppBotsBotIdRouteImport } from './routes/app/bots.$botId'
+import { Route as AppChatBotIdIndexRouteImport } from './routes/app/chat.$botId.index'
+import { Route as AppChatBotIdThreadIdRouteImport } from './routes/app/chat.$botId.$threadId'
 import { Route as ApiPublicTelegramWebhookBotIdRouteImport } from './routes/api/public/telegram/webhook/$botId'
 
 const IndexRoute = IndexRouteImport.update({
@@ -77,6 +79,16 @@ const AppBotsBotIdRoute = AppBotsBotIdRouteImport.update({
   path: '/app/bots/$botId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppChatBotIdIndexRoute = AppChatBotIdIndexRouteImport.update({
+  id: '/app/chat/$botId/',
+  path: '/app/chat/$botId/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppChatBotIdThreadIdRoute = AppChatBotIdThreadIdRouteImport.update({
+  id: '/app/chat/$botId/$threadId',
+  path: '/app/chat/$botId/$threadId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicTelegramWebhookBotIdRoute =
   ApiPublicTelegramWebhookBotIdRouteImport.update({
     id: '/api/public/telegram/webhook/$botId',
@@ -96,6 +108,8 @@ export interface FileRoutesByFullPath {
   '/app/templates': typeof AppTemplatesRoute
   '/app/': typeof AppIndexRoute
   '/app/bots/$botId': typeof AppBotsBotIdRoute
+  '/app/chat/$botId/$threadId': typeof AppChatBotIdThreadIdRoute
+  '/app/chat/$botId/': typeof AppChatBotIdIndexRoute
   '/api/public/telegram/webhook/$botId': typeof ApiPublicTelegramWebhookBotIdRoute
 }
 export interface FileRoutesByTo {
@@ -110,6 +124,8 @@ export interface FileRoutesByTo {
   '/app/templates': typeof AppTemplatesRoute
   '/app': typeof AppIndexRoute
   '/app/bots/$botId': typeof AppBotsBotIdRoute
+  '/app/chat/$botId/$threadId': typeof AppChatBotIdThreadIdRoute
+  '/app/chat/$botId': typeof AppChatBotIdIndexRoute
   '/api/public/telegram/webhook/$botId': typeof ApiPublicTelegramWebhookBotIdRoute
 }
 export interface FileRoutesById {
@@ -125,6 +141,8 @@ export interface FileRoutesById {
   '/app/templates': typeof AppTemplatesRoute
   '/app/': typeof AppIndexRoute
   '/app/bots/$botId': typeof AppBotsBotIdRoute
+  '/app/chat/$botId/$threadId': typeof AppChatBotIdThreadIdRoute
+  '/app/chat/$botId/': typeof AppChatBotIdIndexRoute
   '/api/public/telegram/webhook/$botId': typeof ApiPublicTelegramWebhookBotIdRoute
 }
 export interface FileRouteTypes {
@@ -141,6 +159,8 @@ export interface FileRouteTypes {
     | '/app/templates'
     | '/app/'
     | '/app/bots/$botId'
+    | '/app/chat/$botId/$threadId'
+    | '/app/chat/$botId/'
     | '/api/public/telegram/webhook/$botId'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -155,6 +175,8 @@ export interface FileRouteTypes {
     | '/app/templates'
     | '/app'
     | '/app/bots/$botId'
+    | '/app/chat/$botId/$threadId'
+    | '/app/chat/$botId'
     | '/api/public/telegram/webhook/$botId'
   id:
     | '__root__'
@@ -169,6 +191,8 @@ export interface FileRouteTypes {
     | '/app/templates'
     | '/app/'
     | '/app/bots/$botId'
+    | '/app/chat/$botId/$threadId'
+    | '/app/chat/$botId/'
     | '/api/public/telegram/webhook/$botId'
   fileRoutesById: FileRoutesById
 }
@@ -184,6 +208,8 @@ export interface RootRouteChildren {
   AppTemplatesRoute: typeof AppTemplatesRoute
   AppIndexRoute: typeof AppIndexRoute
   AppBotsBotIdRoute: typeof AppBotsBotIdRoute
+  AppChatBotIdThreadIdRoute: typeof AppChatBotIdThreadIdRoute
+  AppChatBotIdIndexRoute: typeof AppChatBotIdIndexRoute
   ApiPublicTelegramWebhookBotIdRoute: typeof ApiPublicTelegramWebhookBotIdRoute
 }
 
@@ -266,6 +292,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppBotsBotIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/chat/$botId/': {
+      id: '/app/chat/$botId/'
+      path: '/app/chat/$botId'
+      fullPath: '/app/chat/$botId/'
+      preLoaderRoute: typeof AppChatBotIdIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/chat/$botId/$threadId': {
+      id: '/app/chat/$botId/$threadId'
+      path: '/app/chat/$botId/$threadId'
+      fullPath: '/app/chat/$botId/$threadId'
+      preLoaderRoute: typeof AppChatBotIdThreadIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/telegram/webhook/$botId': {
       id: '/api/public/telegram/webhook/$botId'
       path: '/api/public/telegram/webhook/$botId'
@@ -288,6 +328,8 @@ const rootRouteChildren: RootRouteChildren = {
   AppTemplatesRoute: AppTemplatesRoute,
   AppIndexRoute: AppIndexRoute,
   AppBotsBotIdRoute: AppBotsBotIdRoute,
+  AppChatBotIdThreadIdRoute: AppChatBotIdThreadIdRoute,
+  AppChatBotIdIndexRoute: AppChatBotIdIndexRoute,
   ApiPublicTelegramWebhookBotIdRoute: ApiPublicTelegramWebhookBotIdRoute,
 }
 export const routeTree = rootRouteImport

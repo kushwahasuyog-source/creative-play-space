@@ -142,6 +142,40 @@
   color-scheme: dark;
 }
 
+.light {
+  color-scheme: light;
+  --background: oklch(0.985 0.008 152);
+  --foreground: oklch(0.22 0.03 152);
+  --surface: oklch(0.955 0.015 152);
+  --surface-raised: oklch(0.93 0.02 152);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.22 0.03 152);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.22 0.03 152);
+  --primary: oklch(0.46 0.1 150);
+  --primary-foreground: oklch(0.98 0.01 153);
+  --secondary: oklch(0.93 0.02 152);
+  --secondary-foreground: oklch(0.3 0.04 152);
+  --muted: oklch(0.94 0.015 152);
+  --muted-foreground: oklch(0.45 0.03 152);
+  --accent: oklch(0.5 0.11 151);
+  --accent-foreground: oklch(0.98 0.01 153);
+  --mint: oklch(0.36 0.06 152);
+  --border: oklch(0.22 0.03 152 / 12%);
+  --input: oklch(0.22 0.03 152 / 18%);
+  --ring: oklch(0.5 0.11 151);
+  --glow: oklch(0.5 0.11 151 / 25%);
+  --sidebar: oklch(0.955 0.015 152);
+  --sidebar-foreground: oklch(0.22 0.03 152);
+  --sidebar-accent: oklch(0.93 0.02 152);
+  --sidebar-accent-foreground: oklch(0.3 0.04 152);
+  --sidebar-border: oklch(0.22 0.03 152 / 12%);
+  --gradient-hero: radial-gradient(120% 90% at 50% -20%, oklch(0.72 0.12 151 / 35%) 0%, transparent 65%),
+    linear-gradient(180deg, oklch(0.96 0.02 152) 0%, oklch(0.985 0.008 152) 100%);
+  --gradient-panel: linear-gradient(160deg, oklch(1 0 0) 0%, oklch(0.955 0.015 152) 100%);
+  --gradient-text: linear-gradient(100deg, oklch(0.36 0.08 152) 0%, oklch(0.5 0.11 151) 100%);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);

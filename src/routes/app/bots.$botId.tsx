@@ -99,6 +99,13 @@ function BotDetailPage() {
                 <h1 className="text-3xl font-semibold tracking-tight">{bot.name}</h1>
                 <StatusPill status={bot.status} />
               </div>
+              <Link
+                to="/app/chat/$botId"
+                params={{ botId }}
+                className="mt-3 inline-flex items-center gap-2 rounded-xl bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+              >
+                <MessageChatCircle className="size-4" /> Chat with this bot
+              </Link>
               <p className="mt-2 max-w-xl text-sm text-muted-foreground">
                 {spec.tagline ?? bot.prompt}
               </p>

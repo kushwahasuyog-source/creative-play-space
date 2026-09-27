@@ -1,3 +1,4 @@
+import { ThemeToggle } from "@/components/site/ThemeToggle";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Code02, Grid01, MessageSmileCircle, Plus } from "@untitledui/icons";
 import { useEffect, useState, type ReactNode } from "react";
@@ -58,6 +59,8 @@ export function AppShell({ children }: { children: ReactNode }) {
             ))}
           </nav>
 
+          <div className="flex items-center gap-2">
+          <ThemeToggle />
           <Link
             to="/app/new"
             search={{ template: undefined }}
@@ -65,6 +68,7 @@ export function AppShell({ children }: { children: ReactNode }) {
           >
             <Plus className="size-4" /> New bot
           </Link>
+          </div>
         </div>
       </header>
 
