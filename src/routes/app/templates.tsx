@@ -9,6 +9,7 @@ import { listTemplates } from "@/lib/bots.functions";
 export const Route = createFileRoute("/app/templates")({
   head: () => ({
     meta: [
+      { name: "robots", content: "noindex" },
       { title: "Bot templates — BotForge" },
       {
         name: "description",

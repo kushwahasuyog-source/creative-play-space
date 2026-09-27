@@ -3,16 +3,18 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
+      { property: "og:url", content: "/terms" },
       { title: "Terms of Service — BotForge" },
       { name: "description", content: "The terms for using BotForge to build and host Telegram bots." },
       { property: "og:title", content: "Terms of Service — BotForge" },
       { property: "og:description", content: "The terms for using BotForge." },
       { property: "og:type", content: "article" },
     ],
+    links: [{ rel: "canonical", href: "/terms" }],
   }),
   component: () => (
     <main className="mx-auto max-w-2xl px-6 py-16">
-      <Link to="/" className="text-sm text-accent">← BotForge</Link>
+      <nav aria-label="Breadcrumb" className="text-sm text-muted-foreground"><Link to="/" className="text-accent hover:underline">Home</Link> <span aria-hidden>/</span> <span aria-current="page">Terms of Service</span></nav>
       <h1 className="mt-4 text-3xl font-semibold">Terms of Service</h1>
       <p className="mt-2 text-xs text-muted-foreground">Last updated: September 26, 2026</p>
       <div className="mt-8 space-y-4 text-muted-foreground">
