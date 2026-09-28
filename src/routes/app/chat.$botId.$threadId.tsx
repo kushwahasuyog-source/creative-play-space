@@ -198,7 +198,7 @@ function ChatPage() {
                 placeholder={`Message ${botName}…`}
               />
               <PromptInputFooter className="justify-end">
-                <PromptInputSubmit status={sendM.isPending ? "submitted" : undefined} disabled={!text.trim()} />
+                <PromptInputSubmit status={sendM.isPending ? "submitted" : "ready"} disabled={!text.trim()} />
               </PromptInputFooter>
             </PromptInput>
           </div>
