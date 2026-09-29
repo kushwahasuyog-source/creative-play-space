@@ -23,6 +23,7 @@ import {
   PromptInputTextarea,
 } from "@/components/ai-elements/prompt-input";
 import { Shimmer } from "@/components/ai-elements/shimmer";
+import { AgentProgress } from "@/components/app/AgentProgress";
 
 const starters = [
   "Write a Telegram bot in TypeScript that replies to /start and /help using webhooks.",
@@ -211,8 +212,19 @@ function AssistantPage() {
                 </Message>
               ))}
 
-              {status === "submitted" ? (
-                <Shimmer className="text-sm">Reading your request…</Shimmer>
+              {busy ? (
+                <div className="space-y-3">
+                  {status === "submitted" ? (
+                    <Shimmer className="text-sm">Reading your request…</Shimmer>
+                  ) : null}
+                  <AgentProgress
+                    steps={[
+                      { id: "read", title: "Read your request", status: status === "submitted" ? "in-progress" : "completed" },
+                      { id: "code", title: "Write the bot code", status: status === "streaming" ? "in-progress" : "pending" },
+                      { id: "explain", title: "Explain how to run it", status: "pending" },
+                    ]}
+                  />
+                </div>
               ) : null}
 
               {error ? (
