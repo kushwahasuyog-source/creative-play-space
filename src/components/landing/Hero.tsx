@@ -1,4 +1,5 @@
 import { ArrowRight, Stars02 } from "@untitledui/icons";
+import { ColorBends } from "./ColorBends";
 import { ActionLink, Eyebrow, StatusDot } from "./primitives";
 
 const stats = [
@@ -11,6 +12,7 @@ const stats = [
 export function Hero() {
   return (
     <div id="top" className="relative overflow-hidden bg-hero">
+      <ColorBends color="#2563EB" speed={0.2} bandWidth={0.14} intensity={1.3} />
       <div className="absolute inset-0 grid-lines opacity-60" aria-hidden />
       <div className="relative mx-auto w-full max-w-6xl px-6 pb-20 pt-24 md:px-10 md:pt-32">
         <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr]">
