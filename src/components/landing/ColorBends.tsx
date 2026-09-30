@@ -103,8 +103,8 @@ void main(){
       raf = requestAnimationFrame(loop);
     };
 
-    const io = new IntersectionObserver(([e]) => {
-      visible = e.isIntersecting;
+    const io = new IntersectionObserver((entries) => {
+      visible = entries[0]?.isIntersecting ?? true;
     });
     io.observe(canvas);
 
