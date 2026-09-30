@@ -34,10 +34,10 @@ uniform float u_band;uniform float u_int;
 void main(){
   vec2 uv=gl_FragCoord.xy/u_res;
   float d=(uv.x+uv.y)*0.5;
-  float w=sin((d*6.0+u_t)*6.2831)*0.5+0.5;
-  float band=smoothstep(0.5-u_band,0.5,w)*smoothstep(0.5+u_band,0.5,w);
-  float glow=smoothstep(0.9,0.0,abs(uv.y-0.55))*0.6+0.4;
-  float a=band*glow*0.35*u_int;
+  float w=sin((d*3.0+u_t)*6.2831)*0.5+0.5;
+  float band=smoothstep(0.5-u_band*2.0,0.5,w)*smoothstep(0.5+u_band*2.0,0.5,w);
+  float glow=smoothstep(1.0,0.1,abs(uv.y-0.55))*0.6+0.4;
+  float a=band*glow*0.12*u_int;
   gl_FragColor=vec4(u_color,a);
 }`;
     const compile = (type: number, src: string) => {
