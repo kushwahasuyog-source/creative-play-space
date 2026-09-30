@@ -18,8 +18,8 @@ export function Hero() {
             <Eyebrow>
               <Stars02 className="size-3.5" /> AI Telegram bot platform
             </Eyebrow>
-            <h1 className="mt-6 text-4xl font-semibold leading-[1.05] md:text-6xl">
-              Build Telegram bots <span className="text-gradient">with AI</span>
+            <h1 className="mt-6 text-5xl leading-[1.02] tracking-tight md:text-7xl">
+              Build Telegram bots <span className="text-gradient italic">with AI</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
               Describe what you want. BotForge writes the bot, wires up your BotFather token,
