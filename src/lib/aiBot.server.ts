@@ -30,19 +30,10 @@ function gateway() {
   });
 }
 
-const reasoningOptions = {
-  openai: {
-    forceReasoning: true,
-    reasoningEffort: "low",
-    reasoningSummary: "auto",
-    store: false,
-    include: ["reasoning.encrypted_content"],
-  },
-} as const;
 
 export async function generateBotSpec(prompt: string): Promise<BotSpec> {
   const result = streamText({
-    model: gateway().responses("openai/gpt-6-astra"),
+    model: gateway().chat("google/gemini-3-flash-preview"),
     system: [
       "You design Telegram bots. Given a plain-language description, produce a complete bot specification.",
       "Always include a /start and a /help command. Add other commands the description implies (lowercase, no spaces, with the leading slash).",
@@ -52,7 +43,6 @@ export async function generateBotSpec(prompt: string): Promise<BotSpec> {
     ].join(" "),
     prompt,
     output: Output.object({ schema: BotSpecSchema }),
-    providerOptions: reasoningOptions,
   });
   return (await result.output) as BotSpec;
 }
@@ -63,10 +53,9 @@ export async function generateChatReply(
   history: { role: "user" | "assistant"; content: string }[],
 ): Promise<string> {
   const result = streamText({
-    model: gateway().responses("openai/gpt-6-astra"),
+    model: gateway().chat("google/gemini-3-flash-preview"),
     system: `${systemPrompt}\n\nReply in at most 80 words. Plain text only.`,
     messages: [...history, { role: "user" as const, content: userText }],
-    providerOptions: reasoningOptions,
   });
   const text = await result.text;
   return text.trim();

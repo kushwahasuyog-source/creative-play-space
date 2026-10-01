@@ -6,7 +6,7 @@
 
 /*
  * BotForge design system — "Clean Light editorial".
- * Light-first surface, ink text, blue accent, serif display type.
+ * Light-first surface, ink text, green accent, serif display type.
  * All colors are oklch tokens; never hardcode colors in components.
  */
 
@@ -80,13 +80,13 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.21 0.03 264);
 
-  --primary: oklch(0.51 0.21 264);
+  --primary: oklch(0.52 0.15 152);
   --primary-foreground: oklch(0.985 0.004 95);
   --secondary: oklch(0.945 0.008 264);
   --secondary-foreground: oklch(0.3 0.04 264);
   --muted: oklch(0.95 0.007 264);
   --muted-foreground: oklch(0.47 0.03 264);
-  --accent: oklch(0.51 0.21 264);
+  --accent: oklch(0.52 0.15 152);
   --accent-foreground: oklch(0.985 0.004 95);
   --mint: oklch(0.42 0.16 264);
   --urgent: oklch(0.55 0.2 25);
@@ -97,10 +97,10 @@
   --destructive-foreground: oklch(0.985 0.004 95);
   --border: oklch(0.21 0.03 264 / 12%);
   --input: oklch(0.21 0.03 264 / 18%);
-  --ring: oklch(0.51 0.21 264);
+  --ring: oklch(0.52 0.15 152);
   --glow: oklch(0.51 0.21 264 / 22%);
 
-  --chart-1: oklch(0.51 0.21 264);
+  --chart-1: oklch(0.52 0.15 152);
   --chart-2: oklch(0.65 0.18 220);
   --chart-3: oklch(0.42 0.16 264);
   --chart-4: oklch(0.75 0.12 200);
@@ -108,12 +108,12 @@
 
   --sidebar: oklch(0.965 0.006 264);
   --sidebar-foreground: oklch(0.21 0.03 264);
-  --sidebar-primary: oklch(0.51 0.21 264);
+  --sidebar-primary: oklch(0.52 0.15 152);
   --sidebar-primary-foreground: oklch(0.985 0.004 95);
   --sidebar-accent: oklch(0.945 0.008 264);
   --sidebar-accent-foreground: oklch(0.3 0.04 264);
   --sidebar-border: oklch(0.21 0.03 264 / 12%);
-  --sidebar-ring: oklch(0.51 0.21 264);
+  --sidebar-ring: oklch(0.52 0.15 152);
 
   --gradient-hero: radial-gradient(
       120% 90% at 50% -20%,
@@ -149,31 +149,31 @@
   --card-foreground: oklch(0.96 0.008 264);
   --popover: oklch(0.23 0.025 264);
   --popover-foreground: oklch(0.96 0.008 264);
-  --primary: oklch(0.65 0.19 264);
+  --primary: oklch(0.68 0.17 152);
   --primary-foreground: oklch(0.17 0.02 264);
   --secondary: oklch(0.28 0.03 264);
   --secondary-foreground: oklch(0.9 0.02 264);
   --muted: oklch(0.28 0.03 264);
   --muted-foreground: oklch(0.72 0.025 264);
-  --accent: oklch(0.72 0.17 264);
+  --accent: oklch(0.76 0.16 152);
   --accent-foreground: oklch(0.17 0.02 264);
   --mint: oklch(0.8 0.12 264);
   --border: oklch(0.96 0.008 264 / 14%);
   --input: oklch(0.96 0.008 264 / 18%);
-  --ring: oklch(0.72 0.17 264);
+  --ring: oklch(0.76 0.16 152);
   --glow: oklch(0.65 0.19 264 / 40%);
   --sidebar: oklch(0.23 0.025 264);
   --sidebar-foreground: oklch(0.96 0.008 264);
-  --sidebar-primary: oklch(0.65 0.19 264);
+  --sidebar-primary: oklch(0.68 0.17 152);
   --sidebar-primary-foreground: oklch(0.17 0.02 264);
   --sidebar-accent: oklch(0.28 0.03 264);
   --sidebar-accent-foreground: oklch(0.9 0.02 264);
   --sidebar-border: oklch(0.96 0.008 264 / 14%);
-  --sidebar-ring: oklch(0.72 0.17 264);
+  --sidebar-ring: oklch(0.76 0.16 152);
   --gradient-hero: radial-gradient(120% 90% at 50% -20%, oklch(0.65 0.19 264 / 35%) 0%, transparent 65%),
     linear-gradient(180deg, oklch(0.23 0.025 264) 0%, oklch(0.17 0.02 264) 100%);
   --gradient-panel: linear-gradient(160deg, oklch(0.28 0.03 264) 0%, oklch(0.23 0.025 264) 100%);
-  --gradient-text: linear-gradient(100deg, oklch(0.9 0.03 264) 0%, oklch(0.72 0.17 264) 100%);
+  --gradient-text: linear-gradient(100deg, oklch(0.9 0.03 264) 0%, oklch(0.76 0.16 152) 100%);
 }
 
 @layer base {
