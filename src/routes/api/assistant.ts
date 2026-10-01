@@ -29,23 +29,14 @@ export const Route = createFileRoute("/api/assistant")({
         });
 
         const result = streamText({
-          model: lovable.responses("openai/gpt-6-astra"),
+          model: lovable.chat("google/gemini-3-flash-preview"),
           system: SYSTEM,
           messages: await convertToModelMessages(messages),
           abortSignal: request.signal,
-          providerOptions: {
-            openai: {
-              forceReasoning: true,
-              reasoningEffort: "low",
-              reasoningSummary: "auto",
-              store: false,
-              include: ["reasoning.encrypted_content"],
-            },
-          },
         });
 
         return result.toUIMessageStreamResponse({
-          sendReasoning: true,
+          sendReasoning: false,
           originalMessages: messages,
         });
       },
