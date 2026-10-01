@@ -118,15 +118,16 @@
 
   --gradient-hero: radial-gradient(
       120% 90% at 50% -20%,
-      oklch(0.51 0.21 264 / 18%) 0%,
+      oklch(0.55 0.17 152 / 20%) 0%,
       transparent 65%
     ),
-    linear-gradient(180deg, oklch(0.965 0.006 264) 0%, oklch(0.985 0.004 95) 100%);
+    linear-gradient(180deg, oklch(0.945 0.045 152) 0%, oklch(0.975 0.025 152) 100%);
   --gradient-panel: linear-gradient(
     160deg,
-    oklch(1 0 0) 0%,
-    oklch(0.965 0.006 264) 100%
+    oklch(0.995 0.01 152) 0%,
+    oklch(0.95 0.035 152) 100%
   );
+
   --gradient-text: linear-gradient(
     100deg,
     oklch(0.42 0.16 264) 0%,
