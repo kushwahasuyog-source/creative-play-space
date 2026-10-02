@@ -27,11 +27,29 @@ export const listBots = createServerFn({ method: "POST" })
     const db = await admin();
     const { data: bots, error } = await db
       .from("bots")
-      .select("id, name, status, telegram_username, spec, created_at, last_activity_at")
+      .select("id, name, status, telegram_username, spec, message_count, created_at, last_activity_at")
       .eq("owner_id", data.deviceId)
       .order("created_at", { ascending: false });
     if (error) throw new Error(error.message);
-    return bots ?? [];
+    const botIds = (bots ?? []).map((bot) => bot.id);
+    if (!botIds.length) return [];
+
+    const { data: threads, error: threadsError } = await db
+      .from("bot_chat_threads")
+      .select("id, bot_id, title, updated_at")
+      .eq("owner_id", data.deviceId)
+      .in("bot_id", botIds)
+      .order("updated_at", { ascending: false });
+    if (threadsError) throw new Error(threadsError.message);
+
+    return (bots ?? []).map((bot) => {
+      const botThreads = (threads ?? []).filter((thread) => thread.bot_id === bot.id);
+      return {
+        ...bot,
+        chat_count: botThreads.length,
+        recent_chats: botThreads.slice(0, 3),
+      };
+    });
   });
 
 /** One bot with its commands and recent messages. */
@@ -159,6 +177,150 @@ export const generateBot = createServerFn({ method: "POST" })
     }
 
     return { botId: bot.id as string, spec };
+  });
+
+const editableCommand = z.object({
+  id: z.string().uuid().optional(),
+  command: z.string().trim().min(1).max(32),
+  description: z.string().trim().max(100),
+  reply: z.string().max(4000),
+  useAi: z.boolean(),
+});
+
+/** Update a bot's editable identity, behavior and commands. */
+export const updateBot = createServerFn({ method: "POST" })
+  .inputValidator((input: unknown) =>
+    z
+      .object({
+        deviceId,
+        botId: z.string().uuid(),
+        name: z.string().trim().min(2).max(80),
+        prompt: z.string().trim().min(10).max(12000),
+        persona: z.string().trim().max(2000),
+        systemPrompt: z.string().trim().max(12000),
+        fallbackReply: z.string().trim().max(2000),
+        commands: z.array(editableCommand).max(30),
+      })
+      .parse(input),
+  )
+  .handler(async ({ data }) => {
+    const db = await admin();
+    const { data: existing } = await db
+      .from("bots")
+      .select("id, spec")
+      .eq("id", data.botId)
+      .eq("owner_id", data.deviceId)
+      .maybeSingle();
+    if (!existing) throw new Error("Bot not found");
+
+    const currentSpec = (existing.spec ?? {}) as Record<string, unknown>;
+    const spec = {
+      ...currentSpec,
+      name: data.name,
+      persona: data.persona,
+      systemPrompt: data.systemPrompt,
+      fallbackReply: data.fallbackReply,
+      commands: data.commands.map((command) => ({
+        command: command.command.startsWith("/") ? command.command : `/${command.command}`,
+        description: command.description,
+        reply: command.reply,
+        useAi: command.useAi,
+      })),
+    };
+
+    const { error: botError } = await db
+      .from("bots")
+      .update({
+        name: data.name,
+        prompt: data.prompt,
+        spec,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", data.botId)
+      .eq("owner_id", data.deviceId);
+    if (botError) throw new Error(botError.message);
+
+    const { error: deleteError } = await db
+      .from("bot_commands")
+      .delete()
+      .eq("bot_id", data.botId)
+      .eq("owner_id", data.deviceId);
+    if (deleteError) throw new Error(deleteError.message);
+
+    if (data.commands.length) {
+      const { error: commandsError } = await db.from("bot_commands").insert(
+        data.commands.map((command, position) => ({
+          bot_id: data.botId,
+          owner_id: data.deviceId,
+          command: command.command.startsWith("/") ? command.command : `/${command.command}`,
+          description: command.description,
+          reply: command.reply,
+          use_ai: command.useAi,
+          position,
+        })),
+      );
+      if (commandsError) throw new Error(commandsError.message);
+    }
+
+    return { ok: true };
+  });
+
+/** Permanently delete an owned bot and all of its saved activity. */
+export const deleteBot = createServerFn({ method: "POST" })
+  .inputValidator((input: unknown) =>
+    z.object({ deviceId, botId: z.string().uuid() }).parse(input),
+  )
+  .handler(async ({ data }) => {
+    const db = await admin();
+    const { data: bot } = await db
+      .from("bots")
+      .select("id, token_cipher, status")
+      .eq("id", data.botId)
+      .eq("owner_id", data.deviceId)
+      .maybeSingle();
+    if (!bot) throw new Error("Bot not found");
+
+    if (bot.status === "live" && bot.token_cipher) {
+      try {
+        const { decryptToken } = await import("@/lib/botCrypto.server");
+        const { deleteWebhook } = await import("@/lib/telegram.server");
+        await deleteWebhook(decryptToken(bot.token_cipher));
+      } catch (error) {
+        console.error("Could not remove Telegram webhook before deleting bot", error);
+      }
+    }
+
+    const { data: threads } = await db
+      .from("bot_chat_threads")
+      .select("id")
+      .eq("bot_id", data.botId)
+      .eq("owner_id", data.deviceId);
+    const threadIds = (threads ?? []).map((thread) => thread.id);
+    if (threadIds.length) {
+      const { error } = await db
+        .from("bot_chat_messages")
+        .delete()
+        .eq("owner_id", data.deviceId)
+        .in("thread_id", threadIds);
+      if (error) throw new Error(error.message);
+    }
+
+    for (const table of ["bot_chat_threads", "bot_messages", "bot_commands"] as const) {
+      const { error } = await db
+        .from(table)
+        .delete()
+        .eq(table === "bot_chat_threads" ? "bot_id" : "bot_id", data.botId)
+        .eq("owner_id", data.deviceId);
+      if (error) throw new Error(error.message);
+    }
+
+    const { error } = await db
+      .from("bots")
+      .delete()
+      .eq("id", data.botId)
+      .eq("owner_id", data.deviceId);
+    if (error) throw new Error(error.message);
+    return { ok: true };
   });
 
 /** Verify a BotFather token, store it encrypted and remember the bot username. */
