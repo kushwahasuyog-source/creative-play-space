@@ -21,6 +21,7 @@
 
 ## Next phases
 
+- [ ] Expand the bots dashboard with chat history summaries and bot edit/delete actions
 - [ ] Bot Directory (public listing of published bots)
 - [ ] Workflow Builder (triggers, conditions, actions)
 - [ ] Bot Analytics (users, messages, retention charts)
