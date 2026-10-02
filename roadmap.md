@@ -21,7 +21,6 @@
 
 ## Next phases
 
-- [ ] Rebuild the landing and app presentation with a complete Origin UI-inspired card, grid, typography, and spacing system
 - [ ] Bot Directory (public listing of published bots)
 - [ ] Workflow Builder (triggers, conditions, actions)
 - [ ] Bot Analytics (users, messages, retention charts)
